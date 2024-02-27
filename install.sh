@@ -4,8 +4,7 @@
 ARCHIVE="MonitoringDashboard.tar.gz"
 
 
-# 압축을 해제할 디렉토리를 지정합니다.
-# 이 예에서는 현재 디렉토리에 압축을 해제합니다.
+# 압축을 해제할 디렉토리 지정
 DIRECTORY="MonitoringDashboard"
 
 #make directory
@@ -15,7 +14,7 @@ if [ ! -d "$DIRECTORY" ]; then
     echo ""
 fi
 
-# 압축 해제
+# MonitoringDashboard 디렉토리에 압축해제
 echo "압축 파일을 해제합니다."
 tar -xzvf $ARCHIVE -C $DIRECTORY
 echo ""
@@ -29,6 +28,16 @@ if [[ $consent == "y" || $consent == "Y" ]]; then
     echo "실행 권한을 부여합니다..."
     chmod -R +x MonitoringDashboard/*
     echo "실행 권한이 부여되었습니다."
+    echo ""
+    read -p "Dashboard.sh를 실행하시겠습니까? (y/n) " runDashboard
+
+    if [[ $runDashboard == "y" || $runDashboard == "Y" ]]; then
+        # Dashboard.sh 실행
+        echo "Dashboard.sh를 실행합니다..."
+        ./$TARGET_DIR/Dashboard.sh
+    else
+        echo "Dashboard.sh 실행이 취소되었습니다."
+    fi
 else
     echo "실행 권한 부여가 거부되었습니다."
 fi
